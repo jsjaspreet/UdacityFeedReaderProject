@@ -21,12 +21,15 @@ $(function () {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
+
+        // Test whether feeds are defined and non empty
         it('are defined', function () {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
 
 
+        // Test whether feeds have non empty urls
         it('have defined non-empty urls', function () {
             for (var i = 0; i < allFeeds.length; i++) {
                 var feed = allFeeds[i];
@@ -35,6 +38,7 @@ $(function () {
             }
         });
 
+        // Test whether feeds have non empty names
         it('have defined non-empty names', function () {
             for (var i = 0; i < allFeeds.length; i++) {
                 var feed = allFeeds[i];
@@ -47,11 +51,14 @@ $(function () {
 
 
     describe('The menu', function () {
+
+        // Test whether menu is hidden by default
         it('is hidden by default', function () {
             var body = $('body');
             expect(body.attr('class')).toBe("menu-hidden");
         });
 
+        // Test whether visibility of menu changes when button is clicked
         it('changes visibility when the menu button is clicked', function () {
             var menuButton = $(".menu-icon-link");
             var body = $('body');
@@ -64,10 +71,12 @@ $(function () {
 
     describe('Initial Entries', function () {
 
+        // Asynchronous call to load a feed
         beforeEach(function (done) {
             loadFeed(0, done);
         });
 
+        // Test whether at least one entry element is in DOM after loading a feed
         it('have at least one .entry element within .feed container', function (done) {
             var feedContainer = $('.feed')[0];
             expect(feedContainer.children[0].children[0].getAttribute("class")).toBe("entry");
@@ -77,10 +86,14 @@ $(function () {
     });
 
     describe('New Feed Selection', function () {
+
+        // Load an initial feed to compare against
         beforeEach(function (done) {
             loadFeed(0, done);
         });
 
+        // Compare the first entry of a feed with the first entry of another feed
+        // and ensure they are not the same
         it('changes entries when a new feed is loaded', function (done) {
             var feedContainer = $('.feed')[0];
             var firstContent = feedContainer.children[0].children[0].textContent;
